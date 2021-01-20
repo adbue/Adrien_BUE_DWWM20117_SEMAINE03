@@ -1,13 +1,13 @@
 <?php
-
+include("Agence.class.php");
 /*
 *
 *   SOMMAIRE
 *   
-*   ligne 19 à 30 : VARIABLES
-*   Ligne 32 à 162 : GETTER / SETTER
-*   Ligne 165 à 279 : MÉTHODES
-*   Ligne 282 : FIN CLASSE
+*   ligne  à  : VARIABLES
+*   Ligne  à  : GETTER / SETTER
+*   Ligne  à  : MÉTHODES
+*   Ligne  : FIN CLASSE
 *
 */
 
@@ -25,7 +25,6 @@ class Employe extends Agence
     private $_enfant;
     private $_chequeNoel;
     public static $nbrEmploye;
-
 
         // ACCESSEURS ET MUTATEURS
 
@@ -189,6 +188,10 @@ public function calculerPrime()
 }
 
 
+// Fonction Listing
+
+
+
 // Fonction pour savoir si un employé peut bénéficier de chèques vacances ou non :
 
 
@@ -216,6 +219,7 @@ public function arrayTrans()
 
 public function isChequeNoel()
 {
+
     if(is_array($this->getEnfant()))
     {
         $cpt =0;
@@ -240,19 +244,24 @@ public function isChequeNoel()
             }
         }
 
-        if($cpt == 0)
-        {
-            $cpt = "Non";
-        }
         $this->setChequeNoel($cpt);
+
+        if($this->getChequeNoel() == 0){
+            $this->setChequeNoel("Non");
+            return $this->getChequeNoel();
+        }
 
         return 'Oui (Total = '.$this->getChequeNoel().'€ )';
     } 
     else 
     {
-        return $this->getChequeNoel("Non");
+        $this->setChequeNoel("Non");
+        return $this->getChequeNoel();
     }
 }
+
+
+// Cette fonction ne me sert qu'à vérifier mes méthodes
 
 
 public function Display()
@@ -267,7 +276,7 @@ public function Display()
     "Date d'embauche : ".$this->getDateEmbauche()->format('d/m/Y')."\n".
     "Année(s) d'ancienneté : ".$this->getAnciennete()."\n".
     "Salaire annuel brut : ".$this->getSalaire()." €\n".
-    "Primes annuels : ".$this->calculerPrime()." €\n".
+    "Primes annuelles : ".$this->calculerPrime()." €\n".
     "Enfants : ".$this->arrayTrans()."\n".
     "Éligibilité chèques Noël : ".$this->isChequeNoel()."\n".
     "Éligibilité chèques vacances : ".$this->isChequeVacance()."\n"
@@ -276,15 +285,92 @@ public function Display()
 }
 
 }
+
 $oEmploye = new Employe();
+    // AGENCE
+    $oEmploye->setNom("SEGECOP");
+    $oEmploye->setAdresse("133, rue du port");
+    $oEmploye->setCodePostal(15820);
+    $oEmploye->setVille("Bougie");
+    $oEmploye->setModeRestauration("Cantine");
+    // EMPLOYE
     $oEmploye->setNom("Langlois");
     $oEmploye->setPrenom("Jean-Paul");
-
     $oEmploye->setFonction("Chef Comptable");
     $oEmploye->setService("Comptabilité");
-    $oEmploye->setSalaire(30000);
+    $oEmploye->setSalaire(42000);
     $oEmploye->setEnfant(["Camille"=>15, "Jérémy"=>11, "Florian"=>22]);
     $oEmploye->setDateEmbauche("14/05/2015");
-    $oEmploye->Display();
+    // $oEmploye->Display();
+
+    $oEmploye2 = new Employe();
+    // AGENCE
+    $oEmploye2->setNom("AFFCA");
+    $oEmploye2->setAdresse("2,avenue des Lombards");
+    $oEmploye2->setCodePostal(65230);
+    $oEmploye2->setVille("Chandelle");
+    $oEmploye2->setModeRestauration("Extérieur");
+    // EMPLOYE
+    $oEmploye2->setNom("Franc");
+    $oEmploye2->setPrenom("José");
+    $oEmploye2->setFonction("Agent d'entretien");
+    $oEmploye2->setService("Entretien");
+    $oEmploye2->setSalaire(16000);
+    $oEmploye2->setEnfant("Non");
+    $oEmploye2->setDateEmbauche("14/05/2010");
+    // $oEmploye2->Display();
+
+    $oEmploye3 = new Employe();
+    // AGENCE
+    $oEmploye3->setNom("Société Dupont");
+    $oEmploye3->setAdresse("21, rue du pont");
+    $oEmploye3->setCodePostal(10000);
+    $oEmploye3->setVille("Chandelier");
+    $oEmploye3->setModeRestauration("Cantine");
+    // EMPLOYE
+    $oEmploye3->setNom("Groseille");
+    $oEmploye3->setPrenom("Patricia");
+    $oEmploye3->setFonction("Secrétaire");
+    $oEmploye3->setService("Administration");
+    $oEmploye3->setSalaire(22000);
+    $oEmploye3->setEnfant(["Kévin"=>17, "Aristide"=>12, "Barnabé"=>7]);
+    $oEmploye3->setDateEmbauche("14/09/2009");
+    // $oEmploye3->Display();
+
+    $oEmploye4 = new Employe();
+    // AGENCE
+    $oEmploye4->setNom("HIQQPK");
+    $oEmploye4->setAdresse("26, rue des enfers");
+    $oEmploye4->setCodePostal(03650);
+    $oEmploye4->setVille("Hors-Léant sur Loire");
+    $oEmploye4->setModeRestauration("Cantine");
+    // EMPLOYE
+    $oEmploye4->setNom("Vuzelet");
+    $oEmploye4->setPrenom("Edmond");
+    $oEmploye4->setFonction("Technicien réseau informatique");
+    $oEmploye4->setService("Informatique");
+    $oEmploye4->setSalaire(25200);
+    $oEmploye4->setEnfant(["Camille"=>25, "Florine"=>20]);
+    $oEmploye4->setDateEmbauche("14/05/2007");
+    // $oEmploye4->Display();
+
+    $oEmploye5 = new Employe();
+    // AGENCE
+    $oEmploye5->setNom("JKLP inc");
+    $oEmploye5->setAdresse("2, rue des cerises");
+    $oEmploye5->setCodePostal(01000);
+    $oEmploye5->setVille("Mont Fendu");
+    $oEmploye5->setModeRestauration("Extérieur");
+    // EMPLOYE
+    $oEmploye5->setNom("Gecépa");
+    $oEmploye5->setPrenom("Laurent");
+    $oEmploye5->setFonction("Aide-Comptable");
+    $oEmploye5->setService("Comptabilité");
+    $oEmploye5->setSalaire(27600);
+    $oEmploye5->setEnfant(["Enzo"=>2]);
+    $oEmploye5->setDateEmbauche("14/10/2020");
+    // $oEmploye5->Display();
+var_dump($oEmploye5);
+
 ?>
 
