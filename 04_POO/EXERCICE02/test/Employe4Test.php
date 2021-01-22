@@ -31,14 +31,14 @@ class Employe4Test extends TestCase
     
     // Commentez ces 2 fonctions si vous executez tous les fichiers de tests à la fois
     
-    /*public function testNombreEmploye(){
+/*     public function testNombreEmploye(){
         $this->assertEquals(0,Employe::$nbrEmploye);
     }
     
     public function testNombreEmploye2(){
         $this->getListEmploye();
         $this->assertEquals($this->nombreEmployeTest4,Employe::$nbrEmploye);
-    }*/
+    }  */
     
 
 
@@ -52,6 +52,7 @@ class Employe4Test extends TestCase
         $employe = new Employe();
         $this->assertEquals($this->nombreEmployeTestComplet + 1,Employe::$nbrEmploye);
     }
+     
 }
 
 ?>

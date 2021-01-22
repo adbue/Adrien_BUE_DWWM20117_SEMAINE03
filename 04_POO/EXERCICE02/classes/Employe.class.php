@@ -1,5 +1,6 @@
 <?php
-include("Agence.class.php");
+
+setlocale(LC_TIME, "fr_FR");
 /*
 *
 *   SOMMAIRE
@@ -12,7 +13,8 @@ include("Agence.class.php");
 */
 
 
-class Employe extends Agence
+
+class Employe
 {
     private $_nom;
     private $_prenom;
@@ -24,9 +26,12 @@ class Employe extends Agence
     private $_chequeVacance;
     private $_enfant;
     private $_chequeNoel;
-    public static $nbrEmploye;
 
-        // ACCESSEURS ET MUTATEURS
+    public static $nbrEmploye; 
+
+    public function __construct(){
+        self::$nbrEmploye =0;
+    }
 
 
     // Nom :
@@ -64,7 +69,7 @@ public function getDateEmbauche()
 }
 public function setDateEmbauche($dateEmbauche) 
 {
-    return $this->_dateEmbauche = DateTime::createFromFormat('d/m/Y', $dateEmbauche);
+    return $this->_dateEmbauche =DateTime::createFromFormat('d/m/Y', $dateEmbauche);
 }
 
 
@@ -106,8 +111,7 @@ public function setService($service)
     return $this->_service = $service;
 }
 
-
-    // Agence où travaille l'employé :
+    // Agence:
 
 
 public function getAgence() 
@@ -118,6 +122,24 @@ public function setAgence($agence)
 {
     return $this->_agence = $agence;
 }
+
+
+    // Ancienneté:
+
+
+    public function getAnciennete() 
+{
+    $today= New DateTime();
+    $dateEmbauche = $this->getDateEmbauche();
+    $result = $dateEmbauche->diff($today);
+    return $this->anciennete = $result->format('%y');
+}
+
+
+    public function setAnciennete($anciennete) 
+    {
+        return $this->_anciennete = $anciennete;
+    }
 
 
     // Chèques vacances:
@@ -162,17 +184,6 @@ public function setChequeNoel($chequeNoel)
     // MÉTHODES
 
 
-// Fonction pour connaître l'ancienneté d'un employé(e) au sein de l'entreprise :
-
-
-public function getAnciennete() 
-{
-    $today = new DateTime();
-    $dateEmploye = $this->getDateEmbauche();
-    $result = $dateEmploye->diff($today);
-    return $result->format('%y');
-}
-
 
 // Fonction pour connaître le montant des deux primes:
     # Le montant de la prime annuelle est de 5% du salaire annuel brut
@@ -198,9 +209,9 @@ public function calculerPrime()
 public function isChequeVacance() 
 {
     if ($this->getAnciennete() >= 1) {
-        return $this->chequeVacance = 'Oui';
+        return $this->chequeVacance = true;
     } else {
-        return $this->chequeVacance = 'Non';
+        return $this->chequeVacance = false;
     }
 }
 
@@ -251,7 +262,7 @@ public function isChequeNoel()
             return $this->getChequeNoel();
         }
 
-        return 'Oui (Total = '.$this->getChequeNoel().'€ )';
+        return "Oui (Total = ".$this->getChequeNoel()."€ )";
     } 
     else 
     {
@@ -259,6 +270,13 @@ public function isChequeNoel()
         return $this->getChequeNoel();
     }
 }
+
+// En Construction
+public function getListEmploye()
+{
+
+}
+
 
 
 // Cette fonction ne me sert qu'à vérifier mes méthodes
@@ -270,7 +288,7 @@ public function Display()
     print_r( 
     "Nom : ".$this->getNom()."\n".
     "Prénom : ".$this->getPrenom()."\n".
-    "Agence : "."\n".
+    "Agence : \n".
     "Service : ".$this->getService()."\n".
     "Fonction : ".$this->getFonction()."\n".
     "Date d'embauche : ".$this->getDateEmbauche()->format('d/m/Y')."\n".
@@ -286,8 +304,9 @@ public function Display()
 
 }
 
+/* 
 $oEmploye = new Employe();
-    // AGENCE
+     // AGENCE
     $oEmploye->setNom("SEGECOP");
     $oEmploye->setAdresse("133, rue du port");
     $oEmploye->setCodePostal(15820);
@@ -352,15 +371,10 @@ $oEmploye = new Employe();
     $oEmploye4->setSalaire(25200);
     $oEmploye4->setEnfant(["Camille"=>25, "Florine"=>20]);
     $oEmploye4->setDateEmbauche("14/05/2007");
-    // $oEmploye4->Display();
+    $oEmploye4->Display(); 
 
     $oEmploye5 = new Employe();
-    // AGENCE
-    $oEmploye5->setNom("JKLP inc");
-    $oEmploye5->setAdresse("2, rue des cerises");
-    $oEmploye5->setCodePostal(01000);
-    $oEmploye5->setVille("Mont Fendu");
-    $oEmploye5->setModeRestauration("Extérieur");
+
     // EMPLOYE
     $oEmploye5->setNom("Gecépa");
     $oEmploye5->setPrenom("Laurent");
@@ -370,7 +384,7 @@ $oEmploye = new Employe();
     $oEmploye5->setEnfant(["Enzo"=>2]);
     $oEmploye5->setDateEmbauche("14/10/2020");
     // $oEmploye5->Display();
-var_dump($oEmploye5);
-
+    $oEmploye5->getListEmploye();
+ */
 ?>
 

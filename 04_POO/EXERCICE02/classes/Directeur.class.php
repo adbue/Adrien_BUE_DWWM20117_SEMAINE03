@@ -1,4 +1,5 @@
 <?php
+
 class Directeur extends Employe
 {
     public function calculerPrime() {
@@ -9,3 +10,4 @@ class Directeur extends Employe
     }
 }
 
+?>

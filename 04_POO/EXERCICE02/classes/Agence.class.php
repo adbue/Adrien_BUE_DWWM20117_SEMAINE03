@@ -1,12 +1,13 @@
 <?php
 
-class Agence  {
+class Agence  
+{
 
     private $_nom;
     private $_adresse;
     private $_codePostal;
     private $_ville;
-    private $_ModeRestauration;
+    private $_modeRestauration;
 
     // Get et Set
 
@@ -62,3 +63,4 @@ class Agence  {
 
 }
 
+?>
